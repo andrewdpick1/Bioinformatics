@@ -1,0 +1,82 @@
+Rosalind Bioinformatics Problems
+#1: Given: A DNA string s of length at most 1000 nt. Return: Four integers (separated by spaces) counting the respective number of times that the symbols 'A', 'C', 'G', and 'T' occur in s.
+
+sequence = 'ATCG'
+A = 0
+C = 0
+G = 0
+T = 0
+for nucleotide in sequence:
+    if nucleotide == 'A':
+        A += 1
+    elif nucleotide == 'C':
+        C += 1
+    elif nucleotide == 'G':
+        G += 1
+    elif nucleotide == 'T':
+        T += 1
+print(A, C, G, T)
+
+#2: Transcribe DNA to RNA sequence. (Replace T's with U's):
+
+sequence = "GATCTACC"
+resulting_sequence = ''
+for char in sequence:
+    if char == 'A':
+        resulting_sequence += 'A'
+    elif char == 'T':
+        resulting_sequence += 'U'
+    elif char == 'C':
+        resulting_sequence += 'C'
+    elif char == 'G':
+        resulting_sequence += 'G'
+print(resulting_sequence)
+
+#OR DO THIS, much more efficient:
+s = 'ATCGCTGCGAATCGG'
+print(s.replace("T", "U"))
+
+#3 Sequence a strand of DNA 
+###this program computes the complementary DNA bases to any given 5' to 3' sequence in 5' to 3' direction
+
+print('''Enter 1 if your sequence is in 5' to 3' direction.
+Enter 2 if your sequence is in 3' to 5' direction.''' )
+while True:
+    dna_direction = input('>')
+    #if invalid sequence is entered, it asks for user input again
+    if dna_direction not in ['1', '1.','2','2.']:
+        print('Please enter 1 or 2.')
+    else:
+        break
+print('Enter your DNA sequence.')
+
+sequence = input('>').upper()
+#defining what will be printed
+complementary_sequence = ''
+#here is the loop that analyzes each character in the inputted sequence
+for char in sequence:
+    if char == 'A':
+        complementary_sequence += 'T'
+    elif char == 'T':
+        complementary_sequence += 'A'
+    elif char == 'C':
+        complementary_sequence += 'G'
+    elif char == 'G':
+        complementary_sequence += 'C'
+#this will reverse the complementary strand (which was given in 5' to 3' direciton) so that the output in 5' to 3' direction
+if dna_direction in ['1', '1.']:
+    ordered_complementary_sequence = complementary_sequence[::-1]
+    print("5' " + ordered_complementary_sequence + " 3'")
+#no need to reverse the sequence if the input is in 3' to 5' direction
+else:
+    print("5' " + complementary_sequence + " 3'")
+
+#4 Return the number of rabbit pairs that will be present after n months if we begin with 1 pair and in each generation, every pair of reproduction-age rabbits produces a litter of k rabbit pairs (instead of only 1 pair).
+
+#fibonacci loop
+def fibonacci_loop(months, offspring):
+    child, parent = 1, 1
+    for itr in range (months - 1):
+      child, parent = parent, parent + child * offspring
+    return child
+print(fibonacci_loop(32, 4))
